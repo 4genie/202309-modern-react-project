@@ -1,3 +1,4 @@
+import Banner from '@/component/Banner';
 import Breadcrumb from '@/component/Breadcrumb';
 import Header from '@/component/Header';
 
@@ -6,6 +7,7 @@ export default function Home() {
     <main>
       <Header />
       <Breadcrumb />
+      <Banner />
     </main>
   );
 }
