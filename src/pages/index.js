@@ -3,7 +3,11 @@ import Breadcrumb from '@/component/Breadcrumb';
 import Header from '@/component/Header';
 import MoreAction from '@/component/MoreAction';
 import ShopInfo from '@/component/ShopInfo';
-import { PlusIcon } from '@radix-ui/react-icons';
+import ShopMenu from '@/component/ShopMenu';
+import MenuCategory from '@/component/MenuCategory';
+import CategoryItems from '@/component/CategoryItems';
+import Item from '@/component/Item';
+
 export default function Home() {
   return (
     <main>
@@ -12,6 +16,7 @@ export default function Home() {
       <Banner />
       <ShopInfo />
       <MoreAction />
+      <ShopMenu />
     </main>
   );
 }
