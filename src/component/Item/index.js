@@ -1,5 +1,7 @@
 import { PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
+import cx from 'classnames';
+import debounce from 'lodash/debounce';
 const Item = ({ data = {} }) => {
   const image = data?.image;
   const title = data?.title;
@@ -9,19 +11,15 @@ const Item = ({ data = {} }) => {
 
   let isAddBtn = count > 0;
 
-  const handleAddBtnClick = (event) => {
+  const handleAddBtnClick = debounce((event) => {
     event.stopPropagation;
     setCount((prev) => prev + 1);
-  };
+  }, 200);
 
-  const handlePlusBtnClick = (event) => {
-    event.stopPropagation;
-    setCount((prev) => prev + 1);
-  };
-  const handleRemoveBtnClick = (event) => {
+  const handleRemoveBtnClick = debounce((event) => {
     event.stopPropagation;
     setCount((prev) => prev - 1);
-  };
+  }, 200);
 
   return (
     <div className="relative mb-1  cursor-pointer bg-white p-4 transition-shadow hover:drop-shadow-lg">
@@ -41,25 +39,21 @@ const Item = ({ data = {} }) => {
         <p className="text-slate-400">${price}</p>
       </div>
 
-      <div className="absolute p-2 top-4 right-4 flex items-center gap-2 bg-black text-white rounded-full">
-        {!isAddBtn && (
-          <button onClick={handleAddBtnClick}>
-            <PlusIcon className="w-6 h-6" />
-          </button>
+      <div
+        className={cx(
+          'absolute p-2 top-4 right-4 w-8 h-8 flex items-center justify-center gap-2 bg-black text-white rounded-full  hover:opacity-75 transition-all',
+          { 'w-auto justify-between px-2': isAddBtn }
         )}
-
+      >
         {isAddBtn && (
           <>
-            <button onClick={handleRemoveBtnClick}>
-              <TrashIcon />
-            </button>
-
-            <div>{count}</div>
-            <button onClick={handlePlusBtnClick}>
-              <PlusIcon />
-            </button>
+            <TrashIcon onClick={handleRemoveBtnClick} />
+            <div className="text-sm px-2">{count}</div>
           </>
         )}
+        <button onClick={handleAddBtnClick}>
+          <PlusIcon />
+        </button>
       </div>
     </div>
   );
