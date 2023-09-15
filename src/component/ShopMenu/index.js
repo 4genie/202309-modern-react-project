@@ -33,7 +33,8 @@ const ShopMenu = () => {
     setActiveCategory(index);
   };
 
-  const activeCategoryLabel = category?.[activeCategoryLabel];
+  const activeCategoryLabel = category?.[activeCategory];
+
   return (
     <div className="flex pl-6">
       <div className="w-[25%] pr-4">
