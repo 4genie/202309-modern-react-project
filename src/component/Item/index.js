@@ -41,7 +41,7 @@ const Item = ({ data = {} }) => {
 
       <div
         className={cx(
-          'absolute p-2 top-4 right-4 w-8 h-8 flex items-center justify-center gap-2 bg-black text-white rounded-full  hover:opacity-75 transition-all',
+          'absolute top-6 right-6 w-8 h-8 flex items-center justify-center gap-2 bg-black text-white rounded-full  hover:opacity-75 transition-all',
           { 'w-auto justify-between px-2': isAddBtn }
         )}
       >

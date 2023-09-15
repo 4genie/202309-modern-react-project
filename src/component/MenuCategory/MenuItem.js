@@ -4,7 +4,7 @@ const MenuItem = ({ label, active, onClick }) => {
     <div
       onClick={onClick}
       className={cx(
-        'text-slate-500 py-2 hover: opacity-75 transition-opacity',
+        'text-slate-500 py-2 hover: opacity-75 transition-opacity cursor-pointer',
         { 'underline text-slate-900': active }
       )}
     >
