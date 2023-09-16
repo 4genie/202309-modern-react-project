@@ -1,15 +1,13 @@
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import Cart from '../Cart';
 import SearchBar from '../SearchBar';
-import { useContext } from 'react';
-import { ProductContext } from '@/data/context';
+import { useSelector } from 'react-redux';
+import map from 'lodash/map';
 const Header = () => {
-  const { cart } = useContext(ProductContext);
+  const cart = useSelector((state) => state.cart);
+  const cartTotalCount = map(cart).reduce((acc, cur) => acc + cur, 0);
 
-  const cartTotalCount = Object.values(cart)?.reduce(
-    (acc, cur) => acc + cur,
-    0
-  );
+  // const cartTotalCount = 0;
   return (
     <div className="flex min-h-[100px] items-center">
       <div className="mr-4 flex items-center">

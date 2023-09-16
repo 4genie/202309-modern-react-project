@@ -1,42 +1,27 @@
-import { useContext, useState } from 'react';
+import { UseSelector, useDispatch, useSelector } from 'react-redux';
+import { add, remove } from '@/data/slice/cartSlice';
 import debounce from 'lodash/debounce';
 import AddButton from '@/component/AddButton';
-import { ProductContext } from '@/data/context';
 
 const Item = ({ data = {} }) => {
   const image = data?.image;
   const title = data?.title;
   const price = data?.price;
 
-  const { cart, setCart } = useContext(ProductContext);
+  const count = useSelector((state) => state.cart?.[data.id]);
+  const dispatch = useDispatch();
 
   const handleAddBtnClick = debounce((event) => {
     event.stopPropagation;
-    //   setCount((prev) => prev + 1);
-    setCart((prev) => {
-      const newCart = { ...prev };
-      if (newCart[data.id]) {
-        newCart[data.id] += 1;
-      } else {
-        newCart[data.id] = 1;
-      }
-      return newCart;
-    });
+    dispatch(add({ id: data.id }));
   }, 200);
 
   const handleRemoveBtnClick = debounce((event) => {
     event.stopPropagation;
-    // setCount((prev) => prev - 1);
-    setCart((prev) => {
-      const newCart = { ...prev };
-      if (newCart[data.id]) {
-        newCart[data.id] -= 1;
-      }
-      return newCart;
-    });
+    dispatch(remove({ id: data.id }));
   }, 200);
 
-  const cartCount = cart[data.id] || 0;
+  const cartCount = count || 0;
 
   return (
     <div className="relative mb-1  cursor-pointer bg-white p-4 transition-shadow hover:drop-shadow-lg">
