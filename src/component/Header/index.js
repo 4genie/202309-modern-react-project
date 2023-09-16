@@ -1,8 +1,15 @@
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import Cart from '../Cart';
 import SearchBar from '../SearchBar';
-
+import { useContext } from 'react';
+import { ProductContext } from '@/data/context';
 const Header = () => {
+  const { cart } = useContext(ProductContext);
+
+  const cartTotalCount = Object.values(cart)?.reduce(
+    (acc, cur) => acc + cur,
+    0
+  );
   return (
     <div className="flex min-h-[100px] items-center">
       <div className="mr-4 flex items-center">
@@ -18,7 +25,7 @@ const Header = () => {
 
       <div className=" flex flex-1 items-center">
         <SearchBar />
-        <Cart />
+        <Cart count={cartTotalCount} />
       </div>
     </div>
   );
