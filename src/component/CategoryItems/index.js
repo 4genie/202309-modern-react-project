@@ -1,17 +1,16 @@
 import { forwardRef, useEffect } from 'react';
 import map from 'lodash/map';
 import Item from '@/component/Item';
+import scroll from '@/utils/scroll';
+
 const CategoryItems = forwardRef(function CategoryItems(
   { data, active, onClick },
   ref
 ) {
   useEffect(() => {
-    const activeElement = document.querySelector(`[data-name="${active}"]`);
-    activeElement?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
+    scroll(active);
   }, [active]);
+
   return (
     <div className="pb-[100px]" ref={ref}>
       {map(data, (items, title) => {
