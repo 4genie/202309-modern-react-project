@@ -1,4 +1,3 @@
-import { useState, useMemo } from 'react';
 import Banner from '@/component/Banner';
 import Breadcrumb from '@/component/Breadcrumb';
 import Header from '@/component/Header';
