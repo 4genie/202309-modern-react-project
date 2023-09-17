@@ -2,31 +2,17 @@ import { useState, useEffect } from 'react';
 import MenuCategory from '@/component/MenuCategory';
 import CategoryItems from '@/component/CategoryItems';
 import mockData from '@/data/mockData';
-
+import { refinedCategory, refinedItems } from '@/utils/refinedData';
 const ShopMenu = () => {
   const [activeCategory, setActiveCategory] = useState('');
   const [category, setCategory] = useState([]);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    // fetch 到 data 後將資料設計成兩個 function
-    // 1. 取得分類資料 refinedCategory
-    // 2. 取得分類下的商品資料 refinedItems
-    const refinedCategory = mockData
-      .map((item) => item.category)
-      ?.filter((item, index, array) => array.indexOf(item) === index);
-    setCategory(refinedCategory);
-
-    const refinedItems = mockData.reduce((acc, cur) => {
-      const category = cur.category;
-      if (!acc[category]) {
-        acc[category] = [];
-      }
-      acc[category].push(cur);
-      return acc;
-    }, {});
-
-    setItems(refinedItems);
+    // 提取資料的所有分類
+    setCategory(refinedCategory(mockData));
+    // 根據分類不同，將同類的 item 歸類在一起
+    setItems(refinedItems(mockData));
   }, []);
 
   const handleOnMenuCategoryClick = (index) => {
