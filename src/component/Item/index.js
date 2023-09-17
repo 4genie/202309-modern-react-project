@@ -1,24 +1,18 @@
-import { UseSelector, useDispatch, useSelector } from 'react-redux';
-import { add, remove } from '@/data/slice/cartSlice';
 import debounce from 'lodash/debounce';
 import AddButton from '@/component/AddButton';
-
+import useCart from '@/hooks/useCart';
 const Item = ({ data = {} }) => {
-  const image = data?.image;
-  const title = data?.title;
-  const price = data?.price;
-
-  const count = useSelector((state) => state.cart?.[data.id]);
-  const dispatch = useDispatch();
+  const { image, title, price, id } = data;
+  const { count, Add, Remove } = useCart(id);
 
   const handleAddBtnClick = debounce((event) => {
     event.stopPropagation;
-    dispatch(add({ id: data.id }));
+    Add(id);
   }, 200);
 
   const handleRemoveBtnClick = debounce((event) => {
     event.stopPropagation;
-    dispatch(remove({ id: data.id }));
+    Remove(id);
   }, 200);
 
   const cartCount = count || 0;
